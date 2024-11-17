@@ -38,6 +38,7 @@ const makeBreakpointCommand = <CommandName extends string>(
   number: number
 ): Command<CommandName> => ({
   name,
+  hidden: true,
   defaultHotkeys: [`${number}`],
   disableHotkeyOnFormTags: true,
   disableHotkeyOnContentEditable: true,
@@ -109,6 +110,7 @@ export const { emitCommand, subscribeCommands } = createCommandsEmitter({
 
     {
       name: "cancelCurrentDrag",
+      hidden: true,
       defaultHotkeys: ["escape"],
       // radix check event.defaultPrevented before invoking callbacks
       preventDefault: false,
@@ -350,8 +352,11 @@ export const { emitCommand, subscribeCommands } = createCommandsEmitter({
 
     {
       name: "openCommandPanel",
+      hidden: true,
       defaultHotkeys: ["meta+k", "ctrl+k"],
-      handler: openCommandPanel,
+      handler: () => {
+        openCommandPanel();
+      },
     },
   ],
 });
